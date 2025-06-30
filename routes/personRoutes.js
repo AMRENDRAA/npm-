@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
   try {
     const data = req.body;
 
-    // person document model
+    // person document model in post route
 
     const newPerson = new Person(data);
 
