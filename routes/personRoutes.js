@@ -58,7 +58,7 @@ router.post("/", async (req, res) => {
     console.log(err);
     res.status(500).json({
       status: "Failed",
-      error: err,
+      error: err.message,
     });
   }
 });

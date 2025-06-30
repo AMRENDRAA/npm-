@@ -10,6 +10,14 @@ app.get("/", (req, res) => {
   res.send("Understanding Express Now ");
 });
 
+// Middleware Function
+const logRequest = (req, res, next) => {
+  console.log(
+    `${new Date().toLocaleString()} Request made to ${req.orginalUrl}`
+  );
+  next();
+};
+
 app.listen(PORT, () => {
   console.log("Server is running on 3000");
 });
