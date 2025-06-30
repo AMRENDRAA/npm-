@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Person = require("./../models/person");
+const { jwtAuthMiddleware, generateToken } = require("./../jwt");
+
 router.get("", async (req, res) => {
   try {
     const data = await Person.find();
@@ -40,19 +42,24 @@ router.get("/:worktype", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const data = req.body;
-
-    // person document model in post route
 
     const newPerson = new Person(data);
 
     const savedPerson = await newPerson.save();
     console.log("data saved ");
+
+    const { password, ...userWithoutPassword } = savedPerson.toObject();
+    const token = generateToken({ username: savedPerson.username });
+
+    console.log("Token is: ", token);
+
     res.status(200).json({
-      status: "sucess",
-      data: data,
+      status: "success",
+      token: token,
+      data: userWithoutPassword,
     });
   } catch (err) {
     console.log(err);
