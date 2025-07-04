@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 //Define the mongodb connection URL
 require("dotenv").config();
 const mongoURI = process.env.MONGODB_URL;
-//const mongoURI = process.env.MONGODB_LOCAL_URL;
+// const mongoURI = process.env.MONGODB_LOCAL_URL;
 mongoose
   .connect(mongoURI)
   .then(() => {
